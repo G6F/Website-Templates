@@ -1,0 +1,688 @@
+
+<html>
+<head>
+<title>⠀</title>
+<meta charset="UTF-8">
+<style type="text/css">
+		:root {
+			--backColor: #85384b;
+			--pulseColor: #6b3442;
+
+		}
+
+		body {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			background-color: black;
+			border: 3px solid var(--backColor);
+			overflow: hidden;
+			display: block;
+			box-sizing: border-box;
+			transition: 3s;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			font-family: "Courier New", cursive, sans-serif;
+		}
+
+		pre {
+			transition: 1s;
+		}
+
+		#logo {
+			color: var(--backColor);
+			font-size: 22px;
+			line-height: 0px;
+			transition: 1s;
+			z-index: 10000;
+		}
+
+
+		.pulseBorder {
+			border: 3px solid var(--pulseColor) !important;
+		}
+
+		.center {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#clock {
+			position: fixed;
+			bottom: -3px;
+			font-size: 24px;
+			transition: 3s;
+			opacity: 0;
+			color: var(--backColor);
+			float: left;
+		}
+
+		#vid {
+			opacity: 0;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			min-width: 100%;
+			min-height: 100%;
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+			z-index: -2;
+			transform: translateX(-50%) translateY(-50%);
+			background-size: cover;
+			-webkit-filter: grayscale(1) brightness(0.3) contrast(1.05);
+			filter: grayscale(1) brightness(0.3) contrast(1.05);
+			object-fit: fill;
+			display: block;
+			transition: 2s;
+		}
+
+		.clickToPlay {
+			position: absolute;
+			margin-top: -100px;
+			color: #85384b;
+			font-size: 33px;
+			transition: 2s;
+			opacity: 0;
+		}
+
+		#clickToPlay {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+		}
+
+		.hitCount {
+			position: fixed;
+			bottom: -3px;
+			right: 5px;
+			transition: 3s;
+			color: var(--backColor);
+			font-size: 24px;
+			opacity: 0;
+		}
+
+		a.hitCounter.badge-done0 {
+			display: none !important;
+		}
+
+		a {
+			text-decoration: none;
+			color: var(--backColor);
+			transition: 2s;
+		}
+
+		#backgroundOverlay {
+			position: absolute;
+			;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transition: 2s;
+			z-index: -1;
+		}
+
+		.slider {
+			-webkit-appearance: none;
+			width: 300px;
+			height: 5px;
+			background: var(--backColor);
+			outline: none;
+			opacity: 1;
+			margin-top: 12px;
+			transition: 2s;
+
+
+		}
+
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 15px;
+			height: 15px;
+			background: var(--pulseColor);
+			cursor: pointer;
+			border-radius: 15px;
+			transition: 2s;
+		}
+
+		#musClick {
+			opacity: 0;
+			margin-top: -90px;
+			position: absolute;
+			font-size: 32px;
+			color: var(--backColor);
+			transition: 2s;
+			cursor: pointer;
+		}
+
+		#musControls {
+			position: absolute;
+			background: #0a0a0a;
+			width: 400px;
+			height: 75px;
+			margin-top: -30px;
+			border: 3px solid var(--backColor);
+			line-height: 10px;
+			bottom: 0px;
+			transition: 2s;
+		}
+
+		#musControlsContainer {
+			width: 400px;
+			height: 70px;
+			transition: 2s;
+			opacity: 0;
+		}
+
+		#nowPlaying {
+			color: var(--backColor);
+			transition: 2s;
+			line-height: 20px;
+		}
+
+		.arrows {
+			line-height: 32px;
+			font-size: 32px;
+			color: var(--backColor);
+			transition: 2s;
+			margin-top: 10px;
+			bottom: -5px;
+			position: absolute;
+		}
+
+		.controls {
+			position: absolute;
+			width: 100%;
+			height: 25px;
+			bottom: 5px;
+		}
+
+		#closeMusControls {
+			color: var(--backColor);
+			transition: 2s;
+			cursor: pointer;
+		}
+
+
+		#linkClick {
+			opacity: 0;
+			margin-top: 80px;
+			position: absolute;
+			font-size: 32px;
+			color: var(--backColor);
+			transition: 2s;
+			cursor: pointer;
+		}
+
+		#links {
+			position: absolute;
+			background: #0a0a0a;
+			width: 150px;
+			/*400*/
+			height: 40px;
+			margin-top: -30px;
+			border: 3px solid var(--backColor);
+			line-height: 10px;
+			top: 0px;
+			transition: 2s;
+		}
+
+		#linksContainer {
+			position: absolute;
+			margin-top: 30px;
+			width: 150px;
+			/*400*/
+			height: 5px;
+			transition: 2s;
+			opacity: 0;
+		}
+
+		#closeLinks {
+			position: absolute;
+			color: var(--backColor);
+			transition: 2s;
+			cursor: pointer;
+			bottom: 0px;
+			z-index: -1;
+		}
+
+		.linkBtnBox {
+			height: 100%;
+			width: 100%;
+			/*33.33*/
+			float: left;
+			font-size: 32px;
+			line-height: 32px;
+		}
+
+		.linkBtnTxt {
+			color: var(--backColor);
+			cursor: pointer;
+			transition: 2s;
+			position: relative; bottom: -5px;
+		}
+
+		.linksActual {
+			position: absolute;
+			width: 150px;
+			height: 50%;
+			background-color: #0a0a0a;
+			border: 3px solid var(--backColor);
+			transition: 2s;
+			bottom: -52%;
+			color: var(--backColor);
+			left: 50%;
+			transform: translate(-50%, 0%);
+		}
+	</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="three.r95.min.js"></script>
+<script src="vanta.waves.min.js"></script>
+</head>
+<body onload="clock();">
+<embed src="サイレント.mp3" type="audio/mp3" autostart="true" hidden="true" style="display: none;">
+<iframe src="サイレント.mp3" type="audio/mp3" allow="autoplay" style="display:none"></iframe>
+<div id="clickToPlay"></div>
+<div id="backgroundOverlay"></div>
+<video id="vid" autoplay>
+<source id="vidSrc" type="video/mp4">
+</video>
+<span id="clock"></span>
+<span class="clickToPlay center">click to enter the basement</span>
+<div class="center" id="logo">
+    <pre>   ┌┬┐      ┌─┐      ┌─┐      ┬─┐      ┬      ┬  ┬      ┌─┐      ┌┬┐</pre>
+    <pre>    ││      ├┤       ├─┘      ├┬┘      │      └┐┌┘      ├┤        ││</pre>
+    <pre>   ─┴┘      └─┘      ┴        ┴└─      ┴       └┘       └─┘      ─┴┘</pre>
+</div>
+<div id="musClick" class="center">♪</div>
+<div id="musControlsContainer" class="center">
+<center><span id="closeMusControls">↓</span></center>
+<div id="musControls">
+<center>
+<div id="nowPlaying"><span>Now playing: </span><br><span class="vidName"></span></div>
+<div class="controls">
+<span class="arrows" onclick="prevSong()" style="cursor: pointer; left: 10px;">🡄</span><input type="range" min="0" max="100" value="50" class="slider" id="musSlider" oninput="SetVolume(this.value); volPercentage();"><span class="arrows" onclick="nextSong();" style="cursor: pointer; right: 10px;">🡆</span>
+</div>
+</center>
+</div>
+</div>
+<div id="linkClick" class="center">⛓</div>
+<div id="linksContainer" class="center">
+<div id="links">
+<div class="linkBtnBox">
+<center><span class="linkBtnTxt" id="manono">manono</span></center>
+</div>
+<!--div class="linkBtnBox">
+<center><span class="linkBtnTxt" id="megumin">megumin</span></center>
+</div-->
+</div>
+<center><span id="closeLinks">↑</span></center>
+</div>
+<div class="linksActual" id="linksManono">
+<center>
+<a href="https://steamcommunity.com/id/xxxtentacion" target="_blank"><span>steam</span></a><br>
+<a href="https://github.com/vmanono" target="_blank"><span>github</span></a>
+</center>
+</div>
+
+<!--div class="linksActual" id="linksMegumin">
+<center>
+<a href="https://www.instagram.com/veryfuckingholy_/" target="_blank"><span>instagram</span></a><br>
+<a href="https://discord.gg/nt4nVH4" target="_blank"><span>discord server</span></a>
+</center>
+</div-->
+
+<!--a class="hitCounter" data-name="3aa833d5291101da3cf0b4c48dcbeb23|5|page|1|#ea5050|#ffffff|small|s-hit"></a>
+<script>
+		document.write("<script type='text/javascript' src='https://visitorshitcounter.com/js/hitCounter.js?v=" + Date.now() +
+			"'><\/script>");
+	</script>
+<div class="hitCount"><span>Total Visitors: </span><span id="visited">0</span></div-->
+<script type="text/javascript">
+		const bgOverlay = VANTA.WAVES({
+			el: "#backgroundOverlay",
+			mouseControls: false,
+			touchControls: false,
+			scale: 1.00,
+			scaleMobile: 1.00,
+			color: "#050505",
+			shininess: 1.00,
+			waveSpeed: 0.40,
+			zoom: 1
+		})
+
+		window.SetVolume = function (val) {
+			vidVar.volume = val / 100;
+		}
+
+
+		setTimeout(() => {
+			$("#visited").text(($(".hitCounter").text().replace(/^0+/, '')));
+			$(".hitCounter").remove();
+		}, 1000);
+
+		var vidVar = $("#vid")[0];
+		setTimeout(() => {
+			if (vidVar.paused) {
+				$(".clickToPlay").css("opacity", "1");
+			} else {
+				main()
+			}
+		}, 1000);
+
+		let mainBol = false;
+
+		function main() {
+			if (!mainBol) {
+				vidVar.play();
+				mainBol = true;
+				var i = 0;
+				var l = $("pre").length - 1;
+				setInterval(() => {
+					if (i > l) {
+						i = 0
+					};
+					logo(i);
+					i++;
+				}, 400);
+
+				function logo(x) {
+					$("pre:eq(" + x + ")").css("color", "var(--pulseColor)");
+					setTimeout(() => {
+						$("pre:eq(" + x + ")").css("color", "var(--backColor)");
+					}, 1500);
+				};
+				setInterval(() => {
+					if ($("body").hasClass("pulseBorder")) {
+						$("body").removeClass("pulseBorder");
+						$("#musControls").removeClass("pulseBorder");
+						$("#links").removeClass("pulseBorder");
+						$("#clock").css("color", "--backColor");
+						$(".hitCount").css("color", "--backColor");
+						$("#musClick").css("color", "var(--backColor)");
+						$("#nowPlaying").css("color", "var(--backColor)");
+						$(".arrows").css("color", "var(--backColor)");
+						$("#closeMusControls").css("color", "var(--backColor)");
+						$("#linkClick").css("color", "var(--backColor)");
+						$("#closeLinks").css("color", "var(--backColor)");
+						$(".linkBtnTxt").css("color", "var(--backColor)");
+						$(".linksActual").removeClass("pulseBorder");
+						$(".linksActual").css("color", "var(--backColor)");
+						$("a").css("color", "var(--backColor)");
+					} else {
+						$("body").addClass("pulseBorder");
+						$("#musControls").addClass("pulseBorder");
+						$("#links").addClass("pulseBorder");
+						$("#clock").css("color", "var(--pulseColor)");
+						$(".hitCount").css("color", "var(--pulseColor)");
+						$("#musClick").css("color", "var(--pulseColor)");
+						$("#nowPlaying").css("color", "var(--pulseColor)");
+						$(".arrows").css("color", "var(--pulseColor)");
+						$("#closeMusControls").css("color", "var(--pulseColor)");
+						$("#linkClick").css("color", "var(--pulseColor)");
+						$("#closeLinks").css("color", "var(--pulseColor)");
+						$(".linkBtnTxt").css("color", "var(--pulseColor)");
+						$(".linksActual").addClass("pulseBorder");
+						$(".linksActual").css("color", "var(--pulseColor)");
+						$("a").css("color", "var(--pulseColor)");
+					}
+				}, 2500);
+
+
+				vidVar.play();
+				$("#musClick").css("opacity", "1");
+				$("#linkClick").css("opacity", "1");
+				$(".vidName").css("opacity", "1");
+				$("#clock").css("opacity", "1");
+				$("#clickToPlay").css("display", "none");
+				$("#vid").css("opacity", "1");
+				$("#backgroundOverlay").css("opacity", "0.7");
+				$(".hitCount").css("opacity", "1");
+				$(".clickToPlay").css("opacity", "0");
+				setTimeout(() => {
+					$(".clickToPlay").css("display", "none");
+				}, 2000);
+			}
+
+			//shit lol
+			var title = ["⠀", "𝕕", "𝕕𝕖", "𝕕𝕖𝕡", "𝕕𝕖𝕡𝕣", "𝕕𝕖𝕡𝕣𝕚", "𝕕𝕖𝕡𝕣𝕚𝕧", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖",
+				"𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕.", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕.𝕝", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕.𝕝𝕚.", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕.𝕝𝕚𝕗", "𝕕𝕖𝕡𝕣𝕚𝕧𝕖𝕕.𝕝𝕚𝕗𝕖"
+			];
+			var tI = 0;
+			let dir = 0;
+			let timefix = false;
+			setInterval(() => {
+				if (dir == 0 && !timefix) {
+					if (tI != title.length - 1) {
+						document.title = title[tI];
+						tI++;
+					} else {
+						if (!timefix) {
+							timefix = true;
+							setTimeout(() => {
+								var d = new Date();
+								document.title = (d.getHours() < 10 ? '0' : '') + d.getHours() + ":" + (d
+									.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+								setTimeout(() => {
+									document.title = d.toLocaleString('en-US', {
+										hour: 'numeric',
+										minute: 'numeric',
+										hour12: true
+									})
+									setTimeout(() => {
+										dir = 1;
+									}, 2500)
+								}, 2500);
+							}, 350);
+						}
+					}
+				} else if (dir == 1 && timefix) {
+					document.title = title[tI];
+					if (tI != 0) {
+						tI--;
+					} else {
+						dir = 0;
+						timefix = false;
+					}
+				}
+			}, 350);
+		}
+
+		var vidNames = [
+			"Lil Peep - lil jeep",
+			"Lil Peep & Lil Tracy – ​cobain",
+			"Lil Peep x Lil Tracy - favorite dress"
+		]
+
+		document.getElementById("vid").volume = 0.5;
+
+		function refresh(x) {
+			$("#vidSrc").attr("src", "./vids/" + x + ".mp4");
+			$(".vidName").text(vidNames[x]);
+			$("#vid")[0].load();
+			$(".tile").css("color", "white");
+			$('.tile:contains("' + vidNames[x] + '")').css("color", "#9e0000");
+		}
+
+		var vidNum = Math.floor(Math.random() * vidNames.length);
+		setTimeout(() => {
+			refresh(vidNum);
+		}, 100);
+
+		function nextSong() {
+			if (vidNum != vidNames.length - 1) {
+				vidNum++
+			} else {
+				vidNum = 0;
+			}
+			refresh(vidNum);
+		}
+
+		function prevSong() {
+			if (vidNum != 0) {
+				vidNum--
+			} else {
+				vidNum = vidNames.length - 1;
+			}
+			refresh(vidNum);
+		};
+
+		function clock() {
+			var d = new Date();
+			var hours = d.getHours();
+			var minutes = d.getMinutes();
+			var seconds = d.getSeconds();
+			if (hours <= 9) hours = "0" + hours;
+			if (minutes <= 9) minutes = "0" + minutes;
+			if (seconds <= 9) seconds = "0" + seconds;
+			date_time = hours + ":" + minutes + ":" + seconds;
+			if (document.layers) {
+				document.layers.time.document.write(date_time);
+				document.layers.time.document.close();
+			} else document.getElementById("clock").innerHTML = date_time;
+			setTimeout("clock()", 1000);
+		};
+
+		$('video').on('ended', function () {
+			nextSong();
+		});
+
+		$("#clickToPlay").click(() => {
+			main();
+		});
+
+		$("#musClick").click(() => {
+			$("#musClick").css({
+				"opacity": "0",
+				"margin-top": "-50px"
+			});
+			setTimeout(() => {
+				$("#musControlsContainer").css({
+					"opacity": "1",
+					"margin-top": "-150px",
+					"height": "110px"
+				});
+			}, 1500);
+		});
+
+
+		$("#closeMusControls").click(() => {
+			$("#musControlsContainer").css({
+				"opacity": "0",
+				"margin-top": "0px",
+				"height": "70px"
+			});
+			setTimeout(() => {
+				$("#musClick").css({
+					"opacity": "1",
+					"margin-top": "-90px"
+				});
+			}, 1500);
+		});
+
+
+
+
+		$("#linkClick").click(() => {
+			$("#linkClick").css({
+				"opacity": "0",
+				"margin-top": "40px"
+			});
+			setTimeout(() => {
+				$("#linksContainer").css({
+					"opacity": "1",
+					"margin-top": "140px",
+					"height": "35px"
+				});
+			}, 1500);
+		});
+
+		var manonoTimeout, meguminTimeout /*, template2Timeout*/ ;
+		$("#closeLinks").click(() => {
+			clearTimeout(manonoTimeout);
+			clearTimeout(meguminTimeout);
+			//clearTimeout(template2Timeout);
+			$("#linksManono").css("bottom", "-52%");
+			//$("#linksMegumin").css("bottom", "-52%");
+			//$("#linksTemplate2").css("bottom", "-52%");
+			isLinksOpen = false;
+			document.documentElement.style.setProperty('--pulseColor', "#85384b");
+			document.documentElement.style.setProperty('--backColor', "#6b3442");
+			$("#linksContainer").css({
+				"opacity": "0",
+				"margin-top": "30px",
+				"height": "5px"
+			});
+			setTimeout(() => {
+				$("#linkClick").css({
+					"opacity": "1",
+					"margin-top": "80px"
+				});
+				$("#linksManono").css("bottom", "-52%");
+				//$("#linksMegumin").css("bottom", "-52%");
+				//$("#linksTemplate2").css("bottom", "-52%");
+			}, 1500);
+		});
+
+		var isLinksOpen = false;
+		$("#manono").click(() => {
+			document.documentElement.style.setProperty('--pulseColor', "#85384b");
+			document.documentElement.style.setProperty('--backColor', "#6b3442");
+			if (isLinksOpen) {
+				$("#linksManono").css("bottom", "-52%");
+				$("#linksMegumin").css("bottom", "-52%");
+				//$("#linksTemplate2").css("bottom", "-52%");
+				manonoTimeout = setTimeout(() => {
+					$("#linksManono").css("bottom", "-30%");
+				}, 2000);
+			} else {
+				isLinksOpen = true;
+				$("#linksManono").css("bottom", "-30%");
+			}
+		});
+
+		/*$("#megumin").click(() => {
+			document.documentElement.style.setProperty('--pulseColor', "red");
+			document.documentElement.style.setProperty('--backColor', "#4a0000");
+			if (isLinksOpen) {
+				$("#linksManono").css("bottom", "-52%");
+				$("#linksMegumin").css("bottom", "-52%");
+				//$("#linksTemplate2").css("bottom", "-52%");
+				meguminTimeout = setTimeout(() => {
+					$("#linksMegumin").css("bottom", "-30%");
+				}, 2000);
+			} else {
+				isLinksOpen = true;
+				$("#linksMegumin").css("bottom", "-30%");
+			}
+		});*/
+
+		/*$("#template2").click(() => {
+			document.documentElement.style.setProperty('--pulseColor', "red");
+			document.documentElement.style.setProperty('--backColor', "#4a0000");
+			if (isLinksOpen) {
+				$("#linksManono").css("bottom", "-52%");
+				$("#linksMegumin").css("bottom", "-52%");
+				$("#linksTemplate2").css("bottom", "-52%");
+				template2Timeout = setTimeout(() => {
+					$("#linksTemplate2").css("bottom", "-30%");
+				}, 2000);
+			} else {
+				isLinksOpen = true;
+				$("#linksTemplate2").css("bottom", "-30%");
+			}
+		});*/
+	</script>
+</body>
+</html>
