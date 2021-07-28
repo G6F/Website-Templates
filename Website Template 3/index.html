@@ -1,0 +1,74 @@
+<html>
+
+<head>
+	<title>⠀</title>
+	<meta charset="UTF-8">
+	<title>switchblades</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+
+<body>
+	<embed src="サイレント.mp3" type="audio/mp3" autostart="true" hidden="true" style="display: none;">
+	<iframe src="サイレント.mp3" type="audio/mp3" allow="autoplay" style="display:none"></iframe>
+	<div id="clickToPlay">
+		<span class="center">Click To Play</span>
+	</div>
+	<div id="border">
+		<div id="borderTop" style="top: 0; left: 0;"></div>
+		<div id="borderRight" style="right: 0; top: 0;"></div>
+		<div id="borderBottom" style="bottom: 0; right: 0;"></div>
+		<div id="borderLeft" style="left: 0; bottom: 0;"></div>
+	</div>
+
+	<div id="main">
+		<div class="center">
+			<pre>                         /$$   /$$               /$$       /$$       /$$                 /$$                    
+                        |__/  | $$              | $$      | $$      | $$                | $$                    
+  /$$$$$$$ /$$  /$$  /$$ /$$ /$$$$$$    /$$$$$$$| $$$$$$$ | $$$$$$$ | $$  /$$$$$$   /$$$$$$$  /$$$$$$   /$$$$$$$
+ /$$_____/| $$ | $$ | $$| $$|_  $$_/   /$$_____/| $$__  $$| $$__  $$| $$ |____  $$ /$$__  $$ /$$__  $$ /$$_____/
+|  $$$$$$ | $$ | $$ | $$| $$  | $$    | $$      | $$  \ $$| $$  \ $$| $$  /$$$$$$$| $$  | $$| $$$$$$$$|  $$$$$$ 
+ \____  $$| $$ | $$ | $$| $$  | $$ /$$| $$      | $$  | $$| $$  | $$| $$ /$$__  $$| $$  | $$| $$_____/ \____  $$
+ /$$$$$$$/|  $$$$$/$$$$/| $$  |  $$$$/|  $$$$$$$| $$  | $$| $$$$$$$/| $$|  $$$$$$$|  $$$$$$$|  $$$$$$$ /$$$$$$$/
+|_______/  \_____/\___/ |__/   \___/   \_______/|__/  |__/|_______/ |__/ \_______/ \_______/ \_______/|_______/</pre>
+		</div>
+	</div>
+	<div id="widgetContainer">
+		<div id="widget">
+			<div id="widgetMain">
+				<span>♪ witchblades - lil peep x lil tracy</span>
+				<span style="color: grey;">|</span>
+				<span id="time" style="width: 60px"></span>
+				<span style="color: grey;">|</span>
+				<span id="burgerMenu" onclick="dropDown();">☰</span>
+			</div>
+			<div id="dropDownContent">
+				<div id="links">
+					<span style="color: var(--color); font-size: 22px; transition: 3s;">Links</span><br>
+					<a href="https://steamcommunity.com/id/xxxtentacion" target="_blank"><span>steam</span></a><br>
+					<a href="https://github.com/vmanono" target="_blank"><span>github</span></a><br>
+					<a href="https://osu.ppy.sh/u/17585019" target="_blank"><span>osu!</span></a><br>
+				</div>
+
+				<div id="groups">
+					<span
+						style="color: var(--color); font-size: 22px; margin-top: -9px; transition: 3s;">Groups</span><br>
+					<a href="https://steamcommunity.com/groups/xxxtentacion"
+						target="_blank"><span>xxxtentacion</span></a><br>
+					<a href="https://steamcommunity.com/groups/jahseh"
+						target="_blank"><span>JahsehDwayneOnfroy</span></a><br>
+					<a href="https://steamcommunity.com/groups/cannabissativa"
+						target="_blank"><span>cannabisclub</span></a><br>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<video autoplay loop id="vid">
+		<source src="vid.mp4" type="video/mp4">
+	</video>
+	<script src="script.js"></script>
+</body>
+
+</html>

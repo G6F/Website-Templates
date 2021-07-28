@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+	  star[c].style.pointerEvents='none';
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+<script language="JavaScript">
+<!-- 
+var space = " ";
+var speed = "150";
+var pos = 0;
+var msg = "♥ suicide ♥ suicide ♠ suicide ♣ suicide ♦ suicide";
+function Scroll()
+{
+document.title = msg.substring(pos, msg.length) + space + msg.substring(0,pos);
+pos++;
+if (pos > msg.length) pos = 0;
+window.setTimeout("Scroll()", speed);
+}
+Scroll();
+-->
+</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manono</title>
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+</head>
+<body>
+<div class="background__video">
+<video src="media/video.mp4" type="video/mp4" autoplay loop muted></video>
+<div class="background__video--cover"></div>
+</div>
+<div class="musicPlayerSection">
+</div>
+<div class="wrapper">
+<div class="wrapper--top">
+<div class="title">
+Manono
+</div>
+<div class="musicPlayer">
+<svg width="100%" height="100%" viewBox="0 0 262 257" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+<g transform="matrix(1,0,0,1,-669.357,-203.344)">
+<g transform="matrix(0.499067,0,0,0.399289,401.935,197.63)">
+<path d="M1012.14,335.244C1012.14,312.712 997.525,294.446 979.498,294.446C899.713,294.446 695.522,294.446 615.738,294.446C597.711,294.446 583.097,312.712 583.097,335.244C583.097,335.246 583.097,335.248 583.097,335.25C583.097,357.781 597.711,376.047 615.738,376.047C695.522,376.047 899.713,376.047 979.498,376.047C997.525,376.047 1012.14,357.781 1012.14,335.25C1012.14,335.248 1012.14,335.246 1012.14,335.244Z" style="fill:rgb(10,8,18);"/>
+</g>
+<g transform="matrix(1,0,0,1,-15.8511,48.7553)">
+<path d="M938.593,282.734C938.593,269.214 927.633,258.254 914.113,258.254C867.086,258.254 764.616,258.254 717.589,258.254C704.07,258.254 693.109,269.214 693.109,282.734C693.109,282.735 693.109,282.735 693.109,282.735C693.109,296.255 704.07,307.215 717.589,307.215C764.616,307.215 867.086,307.215 914.113,307.215C927.633,307.215 938.593,296.255 938.593,282.735C938.593,282.735 938.593,282.735 938.593,282.734Z" style="fill:none;stroke:rgb(220,222,238);stroke-width:0.76px;"/>
+</g>
+<g transform="matrix(0.952874,0,0,0.952874,37.2575,60.1991)">
+<circle cx="800.466" cy="284.708" r="47.61" style="fill:none;stroke:rgb(209,211,227);stroke-opacity:0.5;stroke-width:2.19px;"/>
+</g>
+<g id="spin" transform="matrix(5.83467e-17,-0.952874,0.952874,5.83467e-17,528.709,1094.23)">
+<circle class="progressCircle" cx="800.466" cy="284.708" r="47.61" stroke-dasharray="calc(47.61 * 2 * 3.14)" stroke-dashoffset="calc((47.61 * 2 * 3.14) * (1 - 0/100))" style="fill:none;stroke:white;stroke-opacity:1;stroke-width:2.19px;"/>
+</g>
+<g transform="matrix(0.952874,0,0,0.952874,37.2575,60.1991)">
+<circle class="hoverable stateSwitch" cx="800.466" cy="284.708" r="39" style="stroke:none;fill:white;stroke-opacity:0.5;stroke-width:2.19px;"/>
+</g>
+<path d="M873.235,331.49L857.76,342.728L857.76,320.252L873.235,331.49ZM888.71,331.49L873.235,342.728L873.235,320.252L888.71,331.49Z" style="fill:white;fill-opacity:0.95;"/>
+<path d="M726.765,331.49L742.24,342.728L742.24,320.252L726.765,331.49ZM711.29,331.49L726.765,342.728L726.765,320.252L711.29,331.49Z" style="fill:white;fill-opacity:0.95;"/>
+<g id="next" class="hoverable" transform="matrix(1,0,0,1,668.786,203.344)">
+<path d="M229.362,128.146C229.362,121.939 224.33,116.908 218.124,116.908L190.775,116.908C187.795,116.908 184.936,118.092 182.829,120.2C180.721,122.307 179.537,125.165 179.537,128.146L179.537,128.146C179.537,134.353 184.568,139.384 190.775,139.384L218.124,139.384C224.33,139.384 229.362,134.353 229.362,128.146L229.362,128.146Z" style="fill:rgb(8,35,58);fill-opacity:0;"/>
+</g>
+<g id="back" class="hoverable" transform="matrix(1,0,0,1,522.316,203.344)">
+<path d="M229.362,128.146C229.362,121.939 224.33,116.908 218.124,116.908L190.775,116.908C187.795,116.908 184.936,118.092 182.829,120.2C180.721,122.307 179.537,125.165 179.537,128.146L179.537,128.146C179.537,134.353 184.568,139.384 190.775,139.384L218.124,139.384C224.33,139.384 229.362,134.353 229.362,128.146L229.362,128.146Z" style="fill:rgb(8,35,58);fill-opacity:0;"/>
+</g>
+</g>
+</svg>
+<div class="pause">
+<svg width="100%" height="100%" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<g transform="matrix(1,0,0,1,-782.354,-313.844)">
+<g>
+<g transform="matrix(1,0,0,1,-3.00814,0)">
+<rect x="785.362" y="313.844" width="14.638" height="35.292" style="fill:rgb(22,21,30);"/>
+</g>
+<g transform="matrix(1,0,0,1,17.6462,0)">
+<rect x="785.362" y="313.844" width="14.638" height="35.292" style="fill:rgb(22,21,30);"/>
+</g>
+</g>
+</g>
+</svg>
+</div>
+<div class="play">
+<svg width="100%" height="100%" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<g transform="matrix(1,0,0,1,-785.362,-313.844)">
+<g transform="matrix(6.12323e-17,1,-1,6.12323e-17,1085.08,-469.969)">
+<path d="M801.459,264.422L819.105,299.715L783.812,299.715L801.459,264.422Z" style="fill:rgb(10,8,18);fill-opacity:1;"/>
+</g>
+</g>
+<defs>
+ <filter id="f2" x="0" y="0" width="200%" height="200%">
+<fegaussianblur result="blurOut" in="offOut" stdDeviation="10"/>
+<feblend in="SourceGraphic" in2="blurOut" mode="normal"/>
+</filter>
+</defs>
+</svg>
+</div>
+</div>
+<div class="currentlyPlaying">
+<div class="currentlyPlaying--nowPlaying">
+Now Playing
+</div>
+<div class="currentlyPlaying--nowPlaying--selector">
+-
+</div>
+</div>
+</div>
+<div class="wrapper--bottom">
+<div class="linkButton" onclick="window.open('https://t.me/');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+Telegram
+</div>
+<div class="linkButton--icon">
+<img src="images/tele.png">
+</div>
+</div>
+<div class="linkButton" onclick="window.open('https://steamcommunity.com/id/xxxtentacion');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+Steam
+</div>
+<div class="linkButton--icon">
+<img src="images/steam.png">
+</div>
+</div>
+<div class="linkButton" onclick="window.open('https://ogusers.com/manono');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+OGU
+</div>
+<div class="linkButton--icon">
+<img src="images/ogu.png">
+</div>
+</div>
+<div class="linkButton" onclick="window.open('https://discord.gg/RBbVVQtWCc');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+Discord
+</div>
+<div class="linkButton--icon">
+<img src="images/discord.png">
+</div>
+</div>
+<div class="linkButton" onclick="window.open('https://open.spotify.com/user/vjqybjb76ffdtjqrfzqlvamyj');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+Spotify
+</div>
+<div class="linkButton--icon">
+<img src="images/spotify.png">
+</div>
+</div>
+<div class="linkButton" onclick="window.open('https://instagram.com/xomanono');">
+<div class="linkButton--background"></div>
+<div class="linkButton--text">
+Instagram
+</div>
+<div class="linkButton--icon">
+<img src="images/ig.png">
+</div>
+</div>
+</div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

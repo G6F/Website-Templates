@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}  
+
+a {
+	text-decoration: none;
+	transition: 0.6s;
+	color: #ffffff;
+}
+
+a:hover {
+	color: #fff;
+}
+
+#video, body {  
+	object-fit: cover;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#welcome {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	font-size: 20px;
+  color: #ffffff;
+	transition: 0.6s;
+}
+
+#hidden {
+	transition: 0.6s;
+}
+
+.wrapper{   
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  width: auto;
+  margin: auto;
+  line-height: 0.7; 
+}
+
+.menu {
+  display: flex;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 30px;
+}
+
+/*.clock {
+	position: fixed;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	color: #f1f1f1;
+	width: 100%;
+	padding: 20px;
+}*/
+
+.marquee {
+  position:absolute;
+  display: block;
+  height: 2.5vh;
+}
+.content {
+  margin-left:auto;
+  text-align:center;
+  margin-right:auto;
+  margin-top:50px;
+}
+.avi {
+  border-radius:50%;
+  width:220px;
+  border: 3px solid rgb(112, 112, 112);
+  position: center;
+}
+
+.buttonwrapper {
+  width: auto;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+  font-size: 2.5vh;
+  text-align: center;
+}
+.button {
+  color: white;
+  border: none;
+  outline: none;
+  background-color: Transparent;
+  text-shadow: 2px 2px 8px black;
+  -webkit-transition: .4s;
+  transition-duration: .4s;
+  transition-timing-function: ease-out;
+}
+.button:hover {
+  -webkit-transition: .4s;
+  transition-duration: .4s;
+  transition-timing-function: ease-out;
+  text-shadow: 0px 0px 30px white;
+  transform: scale(1.15);
+}
+
+/* Overline From Center */
+.hvr-overline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+.hvr-overline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  top: 0px;
+  bottom: 20px;
+  background: rgb(112, 112, 112);
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-overline-from-center:hover:before, .hvr-overline-from-center:focus:before, .hvr-overline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+.grow { 
+    transition: all .3s ease-in-out;
+}
+.grow:hover { 
+    transform: scale(1.15);
+}
+hr.line {
+  width: 40%;
+}
+
+.title {
+  width: auto;
+  height: auto;
+  margin: 20px;
+  text-align: center;
+  transition-duration: .5s;
+  transition-timing-function: ease-out;
+  text-shadow: 3px 3px 10px black;
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: -2px;
+  font-size: 7vh;
+  color: white;  
+}
+.title:hover {
+  -webkit-transition: .4s;
+  transition-duration: .4s;
+  transition-timing-function: ease-out;
+  text-shadow: 0px 0px 30px white;
+}
+/* Background Fade */
+  @keyframes fadebg {
+  0%   { opacity: 0;}
+  100% {opacity: 0.4;}
+}  
+.bgfade {
+   animation-timing-function:ease-in;
+  animation-name: fadebg;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+   /* Text - Links Fade */
+   @keyframes fadetext {
+   0%   { opacity: 0;}
+   100% {opacity: 1;}
+}
+.fadetitle {
+  animation-timing-function:ease-in;
+  animation-name: fadetext;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-delay: .5s;
+  opacity: 0; 
+}
+.fadelinks {
+  animation-timing-function:ease-in;
+  animation-name: fadetext;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+  opacity: 0; 
+}
+
+.link {
+  display: table-cell;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 3.5vh;
+  color: white;
+  text-shadow: 1px 1px 6px black;
+  padding: 5px;
+}

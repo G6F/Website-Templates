@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+	
+#navbar {
+	width:100%;
+	margin-top:0px;
+	}
+	
+.article {
+	width:100%;
+	margin-top:50px;
+	
+	}
+	
+#enterWired {
+	width:100%;
+	background-position:center;
+	}
+	
+.blinkFrame {
+	display:none;
+	}
